@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %} Stock Trends {% endblock %}
+
+
+{% block content %}
+
+<section class="container">
+  <h1 class="mt-5">Enter a stock name!</h1>
+
+</section>
+
+<form action="/convert" id="convertForm" class="mt-3 mb-5"> 
+  <div class="form-row m-5">
+    <label> Stock Name
+      <input name="stock" value="{{ stock }}" placeholder="{{stock}}">
+    </label>
+
+    <!-- <label> Month
+      <input name="month" value="{{ month }}", placeholder="Enter a number">
+    </label>
+    -->
+
+    <button type="submit" class="btn btn-primary center">Convert</button>
+  </div>
+
+</form>
+
+
+{% endblock %}
