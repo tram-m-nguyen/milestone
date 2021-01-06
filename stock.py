@@ -19,7 +19,7 @@ def getStock(stockName):
 	
 	response = requests.get(url, params=payload)
 
-	daily = response.json()['Time Series (Daily)']
+	daily = response.json()
 	
 	return daily
 
@@ -37,7 +37,7 @@ def plotStock(stock):
 					'7. dividend amount': '0.0000', 
 					'8. split coefficient': '1.0'}}
     """
-
+	stock = stock['Time Series (Daily)']
 	df = pd.DataFrame(stock)
 
 	df2 = df.T

@@ -1,11 +1,9 @@
 from flask import Flask, render_template, request, redirect, flash
 from stock import getStock, plotStock
 from bokeh.embed import components 
-import pandas as pd
-from bokeh.plotting import figure
 
 app = Flask(__name__)
-
+app.config['SECRET_KEY'] = '98876'
 
 
 @app.route('/')
@@ -20,18 +18,15 @@ def process_form():
 	"""Converts currency and shows historical info about the currency."""
 
 	stockName = request.args['stock'].upper()
-	#month = request.args['month']
-	result = None
-
 	errs = []
 	
-	if stockName is None:
-		errs.append("Please enter stock name")
+	if stockName == "":
+		errs.append("Please enter a stock name.")
 
-	if not errs:
-		result = getStock(stockName)
-		if result is None:
-			errs.append("Unable to find stock info.")
+	result = getStock(stockName)
+	
+	if 'Error Message' in result:
+		errs.append(f"Not a valid stock name: {stockName}")
 
 	if errs:
 		for err in errs:
